@@ -76,7 +76,7 @@ function showNotes() {
 
     }
     let html = "";
-    for (let index = 0; index < titleArray.length; index++) {
+    for (let index = 0; index < notesArray.length; index++) {
         html += `
         <div class="card my-2 mx-2 notesCards" id="${index}" style="width: 16rem;">
         <div class="card-body">
