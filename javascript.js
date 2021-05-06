@@ -1,9 +1,12 @@
-console.log("test");
+// defining our array for storing notes
 let notesArray = [];
 let titleArray = [];
+// firstly running show function to add old stored notes to web page
 showNotesfunction();
+// commands for clearing notes in input area
 let clearNotes = document.getElementById("clearNotes");
 clearNotes.addEventListener("click", clearfunction);
+// commands for adding notes
 let addNotes = document.getElementById("addNotes");
 addNotes.addEventListener("click", function() {
     // checking whether input is provided or not
@@ -11,41 +14,22 @@ addNotes.addEventListener("click", function() {
     if (test == true) {
         return;
     }
+    //add notes function call
     addNotesfunction();
+    //show notes function call to relod stored notes
     showNotesfunction();
+    //clear function to clear the input space
     clearfunction();
 });
 
 
 // functions are written here 
 // storage function
-function storagefunction() {
 
-
-    notesArray = JSON.parse(notes);
-    titleArray = JSON.parse(title);
-    // if (notes == null) {
-    //     notesArray = [];
-    //     titleArray = [];
-
-
-    // } else {
-    //     notesArray = JSON.parse(notes);
-    //     titleArray = JSON.parse(title);
-
-    // }
-
-
-    // console.log("titleArray");
-
-
-
-}
 // add notes function
 function addNotesfunction() {
     let notes = localStorage.getItem("notes");
     let title = localStorage.getItem("title");
-
     if (notes == null) {
         notes = localStorage.setItem("notes", "");
         title = localStorage.setItem("title", "");
@@ -78,13 +62,11 @@ function alertfunction() {
     if (addTitle.value == "") {
         alert("Please Input Title");
         return 1;
-
     } else {
         if (addText.value == "") {
             alert("Please Input Notes");
             return 1;
         }
-
     }
 
 };
@@ -120,7 +102,6 @@ function showNotesfunction() {
     } else {
         notesHtml.innerHTML = html;
     }
-
 }
 
 // Delete Note function 
