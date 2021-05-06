@@ -42,6 +42,11 @@ function addNotesfunction() {
         title = localStorage.setItem("title", "");
         notesArray = [];
         titleArray = [];
+    } else if (notes == undefined) {
+        notes = localStorage.setItem("notes", "");
+        title = localStorage.setItem("title", "");
+        notesArray = [];
+        titleArray = [];
     } else {
         notes = localStorage.getItem("notes");
         title = localStorage.getItem("title");
@@ -87,6 +92,9 @@ function showNotesfunction() {
     } else if (notes == "") {
         notesArray = [];
         titleArray = [];
+    } else if (notes == undefined) {
+        notesArray = [];
+        titleArray = [];
     } else {
         notesArray = JSON.parse(notes);
         titleArray = JSON.parse(title);
@@ -124,6 +132,9 @@ function deleteNotefunction(index) {
         notesArray = [];
         titleArray = [];
     } else if (notes == "") {
+        notesArray = [];
+        titleArray = [];
+    } else if (notes == undefined) {
         notesArray = [];
         titleArray = [];
     } else {
