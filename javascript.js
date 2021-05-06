@@ -1,3 +1,4 @@
+localStorage.clear();
 let notesArray = [];
 let titleArray = [];
 let checkBoxArray = [];
@@ -98,9 +99,14 @@ function showNotesfunction() {
         html += `</h6>
                 <h5 class="card-title">${titleArray[index]}</h5>
                 <p class="card-text">${notesArray[index]}</p></div>              
-                <div class="container" >
-                <a href="#" id="${index}" onclick="deleteNotefunction(this.id)" class="card-link btn btn-danger deleteAll">Delete</a>
-                </div> </div></div>`;
+                <div class="container-fluid d-flex flex-row" style="width:100%;">
+                <a href="#" id="${index}" onclick="deleteNotefunction(this.id)" class="card-link btn btn-danger deleteAll mx-2" style="inline-block;">Delete</a>
+                <button type="button" class="btn btn-primary mx-2" style="inline-block;" data-toggle="modal" data-target="#exampleModalCenter">
+                Update
+                </button>
+                </div> </div></div>
+            
+                `;
     }
     let notesHtml = document.getElementById("notes");
     if (notesArray.length == 0) {
