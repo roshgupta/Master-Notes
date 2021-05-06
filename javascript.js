@@ -89,7 +89,7 @@ function showNotesfunction() {
     let html = "";
     for (let index = 0; index < length; index++) {
         html += `
-                <div class="card my-2 mx-2 notesCards d-flex"  style="width: 16rem;">
+                <div class="card my-2 mx-2 notesCards"  style="width: 16rem;">
                 <div class="card-body d-flex flex-column align-self-stretch " style="height:100%;">
                 <div class="container-fluid" style="margin-bottom:25px; height:100%">
                 <h6 class="card-subtitle mb-2 text-muted">Notes ${index + 1}`;
@@ -134,8 +134,7 @@ function deleteNotefunction(index) {
     showNotesfunction();
 }
 // search function for search bar 
-let inputValue = document.getElementById("search");
-inputValue.addEventListener("input", searchfunction)
+
 let clearAllNotes = document.getElementById("clearAllButton");
 clearAllNotes.addEventListener("click", function() {
     let deleteAll = document.getElementsByClassName("deleteAll");
@@ -146,13 +145,15 @@ clearAllNotes.addEventListener("click", function() {
     showNotesfunction();
     clearfunction();
 })
+let inputValue = document.getElementById("search");
+inputValue.addEventListener("input", searchfunction);
 
 function searchfunction() {
     let inputText = inputValue.value.toLocaleLowerCase();
-    let notecard = document.getElementsByClassName("notesCards");
-    Array.from(notecard).forEach(function(element) {
-        let cardText = element.getElementsByTagName("p")[0].innerHTML.toLocaleLowerCase();
-        let cardTitle = element.getElementsByTagName("h5")[0].innerHTML.toLocaleLowerCase();
+    let noteCards = document.getElementsByClassName("notesCards");
+    Array.from(noteCards).forEach(function(element) {
+        let cardText = element.getElementsByTagName("div")[0].getElementsByTagName("div")[0].getElementsByTagName("p")[0].innerHTML.toLocaleLowerCase();
+        let cardTitle = element.getElementsByTagName("div")[0].getElementsByTagName("div")[0].getElementsByTagName("h5")[0].innerHTML.toLocaleLowerCase();
         if (cardText.includes(inputText)) {
             element.style.display = "flex";
         } else if (cardTitle.includes(inputText)) {
@@ -160,6 +161,7 @@ function searchfunction() {
         } else {
             element.style.display = "none";
         }
+
     });
 }
 
