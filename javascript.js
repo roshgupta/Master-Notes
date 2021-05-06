@@ -193,7 +193,6 @@ saveChanges.addEventListener("click", function() {
     updateNotes.value = "";
     updateImportant.checked = false;
     showNotesfunction();
-    updateAlertfunction();
 });
 let UpdateClose = document.getElementById("UpdateCloseButton");
 UpdateClose.addEventListener("click", function() {
@@ -215,6 +214,8 @@ function updateAlertfunction() {
         if (updateNotes.value == "") {
             alert("Please Input Notes");
             return 1;
+        } else {
+            return 0;
         }
     }
 };
