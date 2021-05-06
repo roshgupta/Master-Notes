@@ -121,28 +121,54 @@ function deleteNotefunction(index) {
     localStorage.setItem("title", JSON.stringify(titleArray));
     showNotesfunction();
 }
-/*
 // search function for search bar 
- let inputvalue = document.getElementById("search");
-inputvalue.addEventListener("input", searchfunction);
-let searchButton = document.getElementById("searchButton");
-searchButton.addEventListener("click", searchfunction);
+let inputValue = document.getElementById("search");
+inputValue.addEventListener("input", function() {
+    let ClearSearchButton = document.getElementById("ClearSearchButton");
+    ClearSearchButton.style.display = "inline-block";
+    searchfunction();
+
+
+    ClearSearchButton.addEventListener("click", function() {
+        ClearSearchButton.style.display = "none"
+        inputValue.value = "";
+        showNotesfunction();
+
+    });
+
+});
+
+//search by search button
+
+
+//clear all notes button
+let clearAllNotes = document.getElementById("clearAllButton");
+clearAllNotes.addEventListener("click", function() {
+    let notesHtml = document.getElementById("notes");
+    notesHtml.innerHTML = `<span>Nothing to Show!!</span>  <span> Use <strong>"Add Notes"</strong> to add notes.</span> `;
+    localStorage.setItem("notes", "");
+    localStorage.setItem("title", "");
+    let notes = localStorage.getItem("notes");
+    let title = localStorage.getItem("title");
+    notesArray = JSON.parse(notes);
+    titleArray = JSON.parse(title);
+})
+
 
 function searchfunction() {
-    let inputvalue = document.getElementById("search");
+    let inputText = inputValue.value.toLocaleLowerCase();
     let notecard = document.getElementsByClassName("notesCards");
     Array.from(notecard).forEach(function(element) {
-        let cardText = element.getElementsByTagName("p")[0].innerHTML;
-        let cardTitle = element.getElementsByTagName("h5")[0].innerHTML;
-        if (cardText.includes(inputvalue)) {
+        let cardText = element.getElementsByTagName("p")[0].innerHTML.toLocaleLowerCase();
+        let cardTitle = element.getElementsByTagName("h5")[0].innerHTML.toLocaleLowerCase();
+        if (cardText.includes(inputText)) {
             element.style.display = "flex";
-        } else if (cardTitle.includes(inputvalue)) {
+        } else if (cardTitle.includes(inputText)) {
             element.style.display = "flex";
         } else {
             element.style.display = "none";
         }
 
     });
-    let markup = document.getElementsByTagName
+
 }
-*/

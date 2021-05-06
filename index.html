@@ -27,7 +27,8 @@
                 </ul>
                 <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search Notes" aria-label="Search" id="search">
-                    <button class="btn btn-outline-danger" id="searchButton" type="submit">Search</button>
+                    <a class="btn btn-outline-danger" id="ClearSearchButton" style="width: 15rem; display: none;">Clear Search</a>
+
                 </form>
             </div>
         </div>
@@ -50,6 +51,7 @@
 
     <div class="container-fluid my-6 border">
         <h2 style="margin-left: 4rem;">Your Notes</h2>
+        <a class="btn btn-outline-danger" id="clearAllButton" style="width: 10rem; float:right; margin-right: 4.5rem;">Clear All Notes</a>
 
         <div id="notes" class="row container-fluid my-6" style="justify-content: center;">
         </div>
