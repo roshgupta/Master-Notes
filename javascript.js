@@ -93,7 +93,7 @@ function showNotesfunction() {
         if (checkBoxArray[index] == false || checkBoxArray[index] == null) {
             html += ``
         } else {
-            html += `<span class="badge badge-danger" style="color: red;background-color: #f8dbdb; margin-left:20px;">New</span>`
+            html += `<span class="badge badge-danger" style="color: red;background-color: #f8dbdb; margin-left:20px;">Important!</span>`
         }
         html += `</h6>
                 <h5 class="card-title">${titleArray[index]}</h5>
