@@ -109,7 +109,7 @@ function showNotesfunction() {
                 <h6 class="card-subtitle mb-2 text-muted">Notes ${index + 1}</h6>
                 <h5 class="card-title">${titleArray[index]}</h5>
                 <p class="card-text">${notesArray[index]}</p>
-                <a href="#" id="${index}" onclick="deleteNotefunction(this.id)" class="card-link btn btn-danger deleteAll">Delete</a>
+                <a href="#" id="${index}" onclick="deleteNotefunction(this.id)" class="card-link btn btn-danger deleteAll" style="position:absolute; bottom:0; margin-bottom: 20px;">Delete</a>
                 </div>
                 </div>
                 `;
