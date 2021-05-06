@@ -1,5 +1,6 @@
 let notesArray = [];
 let titleArray = [];
+let checkBoxArray = [];
 showNotesfunction();
 let clearNotes = document.getElementById("clearNotes");
 clearNotes.addEventListener("click", clearfunction);
@@ -17,30 +18,41 @@ addNotes.addEventListener("click", function() {
 function addNotesfunction() {
     let notes = localStorage.getItem("notes");
     let title = localStorage.getItem("title");
+    let importantCheckbox = localStorage.getItem("important");
     if (notes == null || notes == "" || notes == undefined) {
         notes = localStorage.setItem("notes", "");
         title = localStorage.setItem("title", "");
+        importantCheckbox = localStorage.setItem("important", "");
         notesArray = [];
         titleArray = [];
+        checkBoxArray = [];
     } else {
         notes = localStorage.getItem("notes");
         title = localStorage.getItem("title");
+        importantCheckbox = localStorage.getItem("important");
         notesArray = JSON.parse(notes);
         titleArray = JSON.parse(title);
+        checkBoxArray = JSON.parse(importantCheckbox);
     }
     let addTitle = document.getElementById("floatingTextTitlearea");
     let addText = document.getElementById("floatingTextarea");
+    let important = document.getElementById("customControlAutosizing");
     notesArray.push(addText.value);
     titleArray.push(addTitle.value);
+    checkBoxArray.push(important.checked);
     notes = localStorage.setItem("notes", JSON.stringify(notesArray));
     title = localStorage.setItem("title", JSON.stringify(titleArray));
+    importantCheckbox = localStorage.setItem("important", JSON.stringify(checkBoxArray));
+
 }
 
 function clearfunction() {
     let addTitle = document.getElementById("floatingTextTitlearea");
     let addText = document.getElementById("floatingTextarea");
+    let important = document.getElementById("customControlAutosizing");
     addTitle.value = "";
     addText.value = "";
+    important.checked = false;
 }
 
 function alertfunction() {
@@ -60,12 +72,15 @@ function alertfunction() {
 function showNotesfunction() {
     let notes = localStorage.getItem("notes");
     let title = localStorage.getItem("title");
+    let importantCheckbox = localStorage.getItem("important");
     if (notes == null || notes == "" || notes == undefined) {
         notesArray = [];
         titleArray = [];
+        checkBoxArray = [];
     } else {
         notesArray = JSON.parse(notes);
         titleArray = JSON.parse(title);
+        checkBoxArray = JSON.parse(importantCheckbox);
     }
     let length = titleArray.length;
     let html = "";
@@ -74,7 +89,13 @@ function showNotesfunction() {
                 <div class="card my-2 mx-2 notesCards d-flex"  style="width: 16rem;">
                 <div class="card-body d-flex flex-column align-self-stretch " style="height:100%;">
                 <div class="container-fluid" style="margin-bottom:25px; height:100%">
-                <h6 class="card-subtitle mb-2 text-muted">Notes ${index + 1}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">Notes ${index + 1}`;
+        if (checkBoxArray[index] == false || checkBoxArray[index] == null) {
+            html += ``
+        } else {
+            html += `<span class="badge badge-danger" style="color: red;background-color: #f8dbdb; margin-left:20px;">New</span>`
+        }
+        html += `</h6>
                 <h5 class="card-title">${titleArray[index]}</h5>
                 <p class="card-text">${notesArray[index]}</p></div>              
                 <div class="container" >
@@ -92,12 +113,16 @@ function showNotesfunction() {
 function deleteNotefunction(index) {
     let notes = localStorage.getItem("notes");
     let title = localStorage.getItem("title");
+    let importantCheckbox = localStorage.getItem("important");
     notesArray = JSON.parse(notes);
     titleArray = JSON.parse(title);
+    checkBoxArray = JSON.parse(importantCheckbox);
     notesArray.splice(index, 1);
     titleArray.splice(index, 1);
+    checkBoxArray.splice(index, 1);
     localStorage.setItem("notes", JSON.stringify(notesArray));
     localStorage.setItem("title", JSON.stringify(titleArray));
+    localStorage.setItem("important", JSON.stringify(checkBoxArray));
     showNotesfunction();
 }
 // search function for search bar 
@@ -108,7 +133,10 @@ clearAllNotes.addEventListener("click", function() {
     let deleteAll = document.getElementsByClassName("deleteAll");
     Array.from(deleteAll).forEach(function() {
         deleteNotefunction();
+        clearfunction();
     })
+    showNotesfunction();
+    clearfunction();
 })
 
 function searchfunction() {
