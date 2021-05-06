@@ -65,6 +65,8 @@ function alertfunction() {
         if (addText.value == "") {
             alert("Please Input Notes");
             return 1;
+        } else {
+            return 0;
         }
     }
 };
