@@ -20,14 +20,8 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                </ul>
                 <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search Notes" aria-label="Search" id="search">
-                    <!-- <a class="btn btn-outline-danger" id="ClearSearchButton" style="width: 15rem; display: none;">Clear Search</a> -->
+                    <input class="form-control me-2" type="search" placeholder="Search Notes" aria-label="Search" id="search" style="float: right;">
 
                 </form>
             </div>
@@ -37,12 +31,12 @@
         <h2>Welcome to Master Notes</h2>
         <div class="card-fluid my-3">
             <div class="form-floating my-3">
+                <label for="floatingTextTitlearea" id="titleLabel">Write your Title here</label>
                 <textarea class="form-control" placeholder="Write your Titles here." id="floatingTextTitlearea" style="overflow: hidden;"></textarea>
-                <label for="floatingTextTitlearea" id="titleLabel">Write your Title here.</label>
             </div>
             <div class="form-floating my-3">
+                <label for="floatingTextarea" id="notesLabel">Write your Notes here</label>
                 <textarea class="form-control" placeholder="Write your notes here." id="floatingTextarea" style="height: 100px; overflow: hidden;"></textarea>
-                <label for="floatingTextarea" id="notesLabel">Write your Notes here.</label>
             </div>
             <div class="col-auto my-1">
                 <div class="custom-control custom-checkbox mr-sm-2">
@@ -51,11 +45,10 @@
                 </div>
             </div>
             <div class="container my-3">
-                <button type="button" id="addNotes" class="btn btn-success " style="margin:0px 2px; width:150px">Add Note</button>
-                <button type="button" id="clearNotes" class="btn btn-danger " style="margin:0px 2px; width:150px">Clear</button>
+                <button type="button" id="addNotes" class="btn btn-success " style="margin:0px 2px; width:130px">Add
+                    Note</button>
+                <button type="button" id="clearNotes" class="btn btn-danger " style="margin:0px 2px; width:130px">Clear</button>
             </div>
-
-
         </div>
     </div>
 
@@ -70,17 +63,31 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Update Notes</h5>
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Update Notes<span id="UpdateNotesNumber" style="margin-left: 5px;">Note Number</span></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <div class="form-floating my-3">
+                        <label for="UpdatefloatingTextTitlearea" id="UpdatetitleLabel">Write your Title here</label>
+                        <textarea class="form-control" placeholder="Write your Titles here" id="UpdatefloatingTextTitlearea" style="overflow: hidden;"></textarea>
+                    </div>
+                    <div class="form-floating my-3">
+                        <label for="UpdatefloatingTextarea" id="UpdateNotesLabel">Write your Notes here</label>
+                        <textarea class="form-control" placeholder="Write your notes here" id="UpdatefloatingTextarea" style="height: 100px; overflow: hidden;"></textarea>
+                    </div>
+                    <div class="col-auto my-1">
+                        <div class="custom-control custom-checkbox mr-sm-2">
+                            <input type="checkbox" class="custom-control-input" id="UpdatecustomControlAutosizingUpdate">
+                            <label class="custom-control-label" for="UpdatecustomControlAutosizingUpdate">Mark as
+                                Important</label>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" id="UpdateCloseButton" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="UpdateSaveChanges" data-dismiss="modal">Save changes</button>
                 </div>
             </div>
         </div>

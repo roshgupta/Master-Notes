@@ -1,4 +1,3 @@
-localStorage.clear();
 let notesArray = [];
 let titleArray = [];
 let checkBoxArray = [];
@@ -101,7 +100,7 @@ function showNotesfunction() {
                 <p class="card-text">${notesArray[index]}</p></div>              
                 <div class="container-fluid d-flex flex-row" style="width:100%;">
                 <a href="#" id="${index}" onclick="deleteNotefunction(this.id)" class="card-link btn btn-danger deleteAll mx-2" style="inline-block;">Delete</a>
-                <button type="button" class="btn btn-primary mx-2" style="inline-block;" data-toggle="modal" data-target="#exampleModalCenter">
+                <button type="button" id="${index*1000}" onclick="updatefunction(this.id)" class="btn btn-primary mx-2 " style="inline-block;" data-toggle="modal" data-target="#exampleModalCenter">
                 Update
                 </button>
                 </div> </div></div>
@@ -160,3 +159,62 @@ function searchfunction() {
         }
     });
 }
+
+function updatefunction(index) {
+    let indexVariable = index / 1000;
+    let updateTitle = document.getElementById("UpdatefloatingTextTitlearea");
+    let updateNotes = document.getElementById("UpdatefloatingTextarea");
+    let updateImportant = document.getElementById("UpdatecustomControlAutosizingUpdate");
+    updateTitle.value = titleArray[indexVariable];
+    updateNotes.value = notesArray[indexVariable];
+    updateImportant.checked = checkBoxArray[indexVariable];
+    let notesHeading = document.getElementById("UpdateNotesNumber");
+    notesHeading.innerHTML = (indexVariable + 1);
+}
+let saveChanges = document.getElementById("UpdateSaveChanges");
+saveChanges.addEventListener("click", function() {
+    let updateTest = updateAlertfunction();
+    if (updateTest == true) {
+        return;
+    }
+    let notesHeading = document.getElementById("UpdateNotesNumber");
+    let indexVa = notesHeading.innerHTML;
+    let indexVariable = parseInt(indexVa) - 1;
+    let updateTitle = document.getElementById("UpdatefloatingTextTitlearea");
+    let updateNotes = document.getElementById("UpdatefloatingTextarea");
+    let updateImportant = document.getElementById("UpdatecustomControlAutosizingUpdate");
+    titleArray[indexVariable] = updateTitle.value;
+    notesArray[indexVariable] = updateNotes.value;
+    checkBoxArray[indexVariable] = updateImportant.checked;
+    localStorage.setItem("title", JSON.stringify(titleArray));
+    localStorage.setItem("notes", JSON.stringify(notesArray));
+    localStorage.setItem("important", JSON.stringify(checkBoxArray));
+    updateTitle.value = "";
+    updateNotes.value = "";
+    updateImportant.checked = false;
+    showNotesfunction();
+    updateAlertfunction();
+});
+let UpdateClose = document.getElementById("UpdateCloseButton");
+UpdateClose.addEventListener("click", function() {
+    let updateTitle = document.getElementById("UpdatefloatingTextTitlearea");
+    let updateNotes = document.getElementById("UpdatefloatingTextarea");
+    let updateImportant = document.getElementById("UpdatecustomControlAutosizingUpdate");
+    updateTitle.value = "";
+    updateNotes.value = "";
+    updateImportant.checked = false;
+})
+
+function updateAlertfunction() {
+    let updateTitle = document.getElementById("UpdatefloatingTextTitlearea");
+    let updateNotes = document.getElementById("UpdatefloatingTextarea");
+    if (updateTitle.value == "") {
+        alert("Please Input Title");
+        return 1;
+    } else {
+        if (updateNotes.value == "") {
+            alert("Please Input Notes");
+            return 1;
+        }
+    }
+};
