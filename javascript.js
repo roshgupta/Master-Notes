@@ -35,14 +35,14 @@ function addNotesfunction() {
     notes = localStorage.setItem("notes", JSON.stringify(notesArray));
     title = localStorage.setItem("title", JSON.stringify(titleArray));
 }
-// clear function is written here 
+
 function clearfunction() {
     let addTitle = document.getElementById("floatingTextTitlearea");
     let addText = document.getElementById("floatingTextarea");
     addTitle.value = "";
     addText.value = "";
 }
-// alert function is written here
+
 function alertfunction() {
     let addTitle = document.getElementById("floatingTextTitlearea");
     let addText = document.getElementById("floatingTextarea");
