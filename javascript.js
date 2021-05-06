@@ -1,6 +1,8 @@
 // defining our array for storing notes
 let notesArray = [];
 let titleArray = [];
+// let length = titleArray.length;
+// console.log(length)
 // firstly running show function to add old stored notes to web page
 showNotesfunction();
 // commands for clearing notes in input area
@@ -80,8 +82,8 @@ function showNotesfunction() {
     } else {
         notesArray = JSON.parse(notes);
         titleArray = JSON.parse(title);
-
     }
+
     let length = titleArray.length;
     let html = "";
     for (let index = 0; index < length; index++) {
@@ -91,16 +93,18 @@ function showNotesfunction() {
                 <h6 class="card-subtitle mb-2 text-muted">Notes ${index + 1}</h6>
                 <h5 class="card-title">${titleArray[index]}</h5>
                 <p class="card-text">${notesArray[index]}</p>
-                <a href="#" id="${index}" onclick="deleteNotefunction(this.id)" class="card-link btn btn-danger">Delete</a>
+                <a href="#" id="${index}" onclick="deleteNotefunction(this.id)" class="card-link btn btn-danger deleteAll">Delete</a>
                 </div>
                 </div>
                 `;
+
     }
     let notesHtml = document.getElementById("notes");
     if (notesArray.length == 0) {
         notesHtml.innerHTML = `<span>Nothing to Show!!</span>  <span> Use <strong>"Add Notes"</strong> to add notes.</span> `;
     } else {
         notesHtml.innerHTML = html;
+
     }
 }
 
@@ -123,35 +127,30 @@ function deleteNotefunction(index) {
 }
 // search function for search bar 
 let inputValue = document.getElementById("search");
-inputValue.addEventListener("input", function() {
-    let ClearSearchButton = document.getElementById("ClearSearchButton");
-    ClearSearchButton.style.display = "inline-block";
-    searchfunction();
+inputValue.addEventListener("input", searchfunction)
+    //search by search button
 
 
-    ClearSearchButton.addEventListener("click", function() {
-        ClearSearchButton.style.display = "none"
-        inputValue.value = "";
-        showNotesfunction();
-
-    });
-
-});
-
-//search by search button
-
-
-//clear all notes button
+// clear all notes button
 let clearAllNotes = document.getElementById("clearAllButton");
 clearAllNotes.addEventListener("click", function() {
-    let notesHtml = document.getElementById("notes");
-    notesHtml.innerHTML = `<span>Nothing to Show!!</span>  <span> Use <strong>"Add Notes"</strong> to add notes.</span> `;
-    localStorage.setItem("notes", "");
-    localStorage.setItem("title", "");
-    let notes = localStorage.getItem("notes");
-    let title = localStorage.getItem("title");
-    notesArray = JSON.parse(notes);
-    titleArray = JSON.parse(title);
+
+    let deleteAll = document.getElementsByClassName("deleteAll");
+    Array.from(deleteAll).forEach(function() {
+        deleteNotefunction();
+    })
+
+
+
+    // let notesHtml = document.getElementById("notes");
+    // notesHtml.innerHTML = `<span>Nothing to Show!!</span>  <span> Use <strong>"Add Notes"</strong> to add notes.</span> `;
+    // localStorage.setItem("notes", null);
+    // localStorage.setItem("title", null);
+    // let notes = localStorage.getItem("notes");
+    // let title = localStorage.getItem("title");
+    // // notesArray = JSON.parse(notes);
+    // // titleArray = JSON.parse(title);
+    // showNotesfunction();
 })
 
 
