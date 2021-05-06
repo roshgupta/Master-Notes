@@ -1,48 +1,23 @@
-// defining our array for storing notes
 let notesArray = [];
 let titleArray = [];
-// let length = titleArray.length;
-// console.log(length)
-// firstly running show function to add old stored notes to web page
 showNotesfunction();
-// commands for clearing notes in input area
 let clearNotes = document.getElementById("clearNotes");
 clearNotes.addEventListener("click", clearfunction);
-// commands for adding notes
 let addNotes = document.getElementById("addNotes");
 addNotes.addEventListener("click", function() {
-    // checking whether input is provided or not
     let test = alertfunction();
     if (test == true) {
         return;
     }
-    //add notes function call
     addNotesfunction();
-    //show notes function call to relod stored notes
     showNotesfunction();
-    //clear function to clear the input space
     clearfunction();
 });
 
-
-// functions are written here 
-// storage function
-
-// add notes function
 function addNotesfunction() {
     let notes = localStorage.getItem("notes");
     let title = localStorage.getItem("title");
-    if (notes == null) {
-        notes = localStorage.setItem("notes", "");
-        title = localStorage.setItem("title", "");
-        notesArray = [];
-        titleArray = [];
-    } else if (notes == "") {
-        notes = localStorage.setItem("notes", "");
-        title = localStorage.setItem("title", "");
-        notesArray = [];
-        titleArray = [];
-    } else if (notes == undefined) {
+    if (notes == null || notes == "" || notes == undefined) {
         notes = localStorage.setItem("notes", "");
         title = localStorage.setItem("title", "");
         notesArray = [];
@@ -80,67 +55,45 @@ function alertfunction() {
             return 1;
         }
     }
-
 };
-// show notes function 
+
 function showNotesfunction() {
     let notes = localStorage.getItem("notes");
     let title = localStorage.getItem("title");
-    if (notes == null) {
-        notesArray = [];
-        titleArray = [];
-    } else if (notes == "") {
-        notesArray = [];
-        titleArray = [];
-    } else if (notes == undefined) {
+    if (notes == null || notes == "" || notes == undefined) {
         notesArray = [];
         titleArray = [];
     } else {
         notesArray = JSON.parse(notes);
         titleArray = JSON.parse(title);
     }
-
     let length = titleArray.length;
     let html = "";
     for (let index = 0; index < length; index++) {
         html += `
-                <div class="card my-2 mx-2 notesCards"  style="width: 16rem;">
-                <div class="card-body">
+                <div class="card my-2 mx-2 notesCards d-flex"  style="width: 16rem;">
+                <div class="card-body d-flex flex-column align-self-stretch " style="height:100%;">
+                <div class="container-fluid" style="margin-bottom:25px; height:100%">
                 <h6 class="card-subtitle mb-2 text-muted">Notes ${index + 1}</h6>
                 <h5 class="card-title">${titleArray[index]}</h5>
-                <p class="card-text">${notesArray[index]}</p>
+                <p class="card-text">${notesArray[index]}</p></div>              
+                <div class="container" >
                 <a href="#" id="${index}" onclick="deleteNotefunction(this.id)" class="card-link btn btn-danger deleteAll">Delete</a>
-                </div>
-                </div>
-                `;
-
+                </div> </div></div>`;
     }
     let notesHtml = document.getElementById("notes");
     if (notesArray.length == 0) {
         notesHtml.innerHTML = `<span>Nothing to Show!!</span>  <span> Use <strong>"Add Notes"</strong> to add notes.</span> `;
     } else {
         notesHtml.innerHTML = html;
-
     }
 }
 
-// Delete Note function 
 function deleteNotefunction(index) {
     let notes = localStorage.getItem("notes");
     let title = localStorage.getItem("title");
-    if (notes == null) {
-        notesArray = [];
-        titleArray = [];
-    } else if (notes == "") {
-        notesArray = [];
-        titleArray = [];
-    } else if (notes == undefined) {
-        notesArray = [];
-        titleArray = [];
-    } else {
-        notesArray = JSON.parse(notes);
-        titleArray = JSON.parse(title);
-    }
+    notesArray = JSON.parse(notes);
+    titleArray = JSON.parse(title);
     notesArray.splice(index, 1);
     titleArray.splice(index, 1);
     localStorage.setItem("notes", JSON.stringify(notesArray));
@@ -150,31 +103,13 @@ function deleteNotefunction(index) {
 // search function for search bar 
 let inputValue = document.getElementById("search");
 inputValue.addEventListener("input", searchfunction)
-    //search by search button
-
-
-// clear all notes button
 let clearAllNotes = document.getElementById("clearAllButton");
 clearAllNotes.addEventListener("click", function() {
-
     let deleteAll = document.getElementsByClassName("deleteAll");
     Array.from(deleteAll).forEach(function() {
         deleteNotefunction();
     })
-
-
-
-    // let notesHtml = document.getElementById("notes");
-    // notesHtml.innerHTML = `<span>Nothing to Show!!</span>  <span> Use <strong>"Add Notes"</strong> to add notes.</span> `;
-    // localStorage.setItem("notes", null);
-    // localStorage.setItem("title", null);
-    // let notes = localStorage.getItem("notes");
-    // let title = localStorage.getItem("title");
-    // // notesArray = JSON.parse(notes);
-    // // titleArray = JSON.parse(title);
-    // showNotesfunction();
 })
-
 
 function searchfunction() {
     let inputText = inputValue.value.toLocaleLowerCase();
@@ -189,7 +124,5 @@ function searchfunction() {
         } else {
             element.style.display = "none";
         }
-
     });
-
 }
