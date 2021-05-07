@@ -1,4 +1,3 @@
-localStorage.clear();
 // Declared some array to store values
 let notesArray = []; //Array for storing NOTES
 let titleArray = []; //Array for storing Title
