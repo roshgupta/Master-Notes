@@ -2,6 +2,9 @@ localStorage.clear();
 let notesArray = [];
 let titleArray = [];
 let checkBoxArray = [];
+let addTitle = document.getElementById("floatingTextTitlearea");
+let addText = document.getElementById("floatingTextarea");
+let important = document.getElementById("customControlAutosizing");
 showNotesfunction();
 let clearNotes = document.getElementById("clearNotes");
 clearNotes.addEventListener("click", clearfunction);
@@ -35,30 +38,22 @@ function addNotesfunction() {
         titleArray = JSON.parse(title);
         checkBoxArray = JSON.parse(importantCheckbox);
     }
-    let addTitle = document.getElementById("floatingTextTitlearea");
-    let addText = document.getElementById("floatingTextarea");
-    let important = document.getElementById("customControlAutosizing");
+
     notesArray.push(addText.value);
     titleArray.push(addTitle.value);
     checkBoxArray.push(important.checked);
     notes = localStorage.setItem("notes", JSON.stringify(notesArray));
     title = localStorage.setItem("title", JSON.stringify(titleArray));
     importantCheckbox = localStorage.setItem("important", JSON.stringify(checkBoxArray));
-
 }
 
 function clearfunction() {
-    let addTitle = document.getElementById("floatingTextTitlearea");
-    let addText = document.getElementById("floatingTextarea");
-    let important = document.getElementById("customControlAutosizing");
     addTitle.value = "";
     addText.value = "";
     important.checked = false;
 }
 
 function alertfunction() {
-    let addTitle = document.getElementById("floatingTextTitlearea");
-    let addText = document.getElementById("floatingTextarea");
     if (addTitle.value == "") {
         alert("Please Input Title");
         return 1;
@@ -103,12 +98,7 @@ function showNotesfunction() {
                 <p class="card-text">${notesArray[index]}</p></div>              
                 <div class="container-fluid d-flex flex-row" style="width:100%;">
                 <a href="#" id="${index}" onclick="deleteNotefunction(this.id)" class="card-link btn btn-danger deleteAll mx-2" style="inline-block;">Delete</a>
-                <button type="button" id="${index*1000}" onclick="updatefunction(this.id)" class="btn btn-primary mx-2 " style="inline-block;" data-toggle="modal" data-target="#exampleModalCenter">
-                Update
-                </button>
-                </div> </div></div>
-            
-                `;
+                <button type="button" id="${index*1000}" onclick="updatefunction(this.id)" class="btn btn-primary mx-2 " style="inline-block;" data-toggle="modal" data-target="#exampleModalCenter">Update</button></div> </div></div>`;
     }
     let notesHtml = document.getElementById("notes");
     if (notesArray.length == 0) {
