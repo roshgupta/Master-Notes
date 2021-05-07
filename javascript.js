@@ -1,4 +1,3 @@
-localStorage.clear();
 let notesArray = [];
 let titleArray = [];
 let checkBoxArray = [];
