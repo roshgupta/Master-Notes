@@ -16,6 +16,7 @@ addNotes.addEventListener("click", function() {
     addNotesfunction();
     showNotesfunction();
     clearfunction();
+    window.location.href = "#endOfThePage";
 });
 
 function addNotesfunction() {
