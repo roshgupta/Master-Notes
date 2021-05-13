@@ -18,6 +18,7 @@ addNotes.addEventListener("click", function() { // adding event listener when us
     addNotesfunction(); //calling actual add notes 
     showNotesfunction(); //calling show notes function to update the notes in webpage
     clearfunction(); // callling clearfunction to clear the input area in webpage
+    window.location.href = "#endOfThePage"; //navigation to end of page where notes got added
 });
 //actual add notes function is written here
 function addNotesfunction() {
